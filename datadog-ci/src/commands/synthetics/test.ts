@@ -271,7 +271,7 @@ const getTest = async (
 
       return {errorMessage: `[${chalk.bold.dim(publicId)}] ${chalk.red.bold('Test not authorized')}: ${errorMessage}`}
     }
-
+console.log('errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr', error)
     throw new EndpointError(`Failed to get test: ${formatBackendErrors(error)}\n`, error.response?.status)
   }
 }
