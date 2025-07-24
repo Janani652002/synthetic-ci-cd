@@ -110,6 +110,7 @@ export const formatBackendErrors = (requestError: AxiosError<BackendError>, scop
 // }
 
 const triggerTests = (request: (args: AxiosRequestConfig) => AxiosPromise<any>) => async (data: Payload) => {
+    console.log('Payload', data)
   const resp = await retryRequest(
     {
       data,
