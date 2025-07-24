@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies for datadog-ci
+        run: npm install
+        working-directory: ./datadog-ci
+
+      - name: Build local datadog-ci
+        run: npm run build
+        working-directory: ./datadog-ci
+
+      - name: Link datadog-ci CLI locally
+        run: npm link
+        working-directory: ./datadog-ci
+
+      - name: Install dependencies for custom GitHub Action
+        run: npm install
+        working-directory: ./synthetics-ci-github-action
+
+      - name: Run Jest Tests
+        run: npm test
+        working-directory: ./synthetics-ci-github-action
+
+  synthetic-tests:
+    name: Run Datadog Synthetic Tests
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      ACTIONS_STEP_DEBUG: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies for datadog-ci
+        run: npm install
+        working-directory: ./datadog-ci
+
+      - name: Build and link local datadog-ci CLI
+        run: |
+          npm run build
+          npm link
+        working-directory: ./datadog-ci
+
+      - name: Install dependencies for Action
+        run: npm install
+        working-directory: ./synthetics-ci-github-action
+
+      - name: Run Datadog Synthetic Tests
+        uses: ./synthetics-ci-github-action
+        with:
+          api-key: ${{ secrets.DD_API_KEY }}
+          app-key: ${{ secrets.DD_APP_KEY }}
+          datadog-site: "us5.datadoghq.com"
+          public-ids: |
+            pe9-53m-bhg

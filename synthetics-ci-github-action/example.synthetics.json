@@ -1,0 +1,34 @@
+[
+  {
+    "config": {
+      "assertions": [
+        {
+          "type": "statusCode",
+          "operator": "is",
+          "target": 200
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "https://example.com"
+      },
+      "locations": ["aws:ap-south-1"],
+      "message": "Testing example.com",
+      "name": "Example GET API Test",
+      "options": {
+        "tickEvery": 900,
+        "minLocationFailed": 1,
+        "minFailureDuration": 0,
+        "retry": {
+          "count": 0,
+          "interval": 300
+        },
+        "scripting": {
+          "beforeRequest": "console.log('Starting test for example.com');",
+          "afterRequest": "console.log('Response received:', response.body);"
+        }
+      },
+      "type": "api"
+    }
+  }
+]
