@@ -4,7 +4,11 @@
     "module": "commonjs",
     "strict": true,
     "noImplicitAny": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",                        // 👈 Required for "paths" to work
+    "paths": {
+      "@datadog/datadog-ci": ["../datadog-ci"]
+    }
   },
   "include": ["src", "test"]
 }
