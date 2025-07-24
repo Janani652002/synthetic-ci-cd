@@ -28,7 +28,6 @@ const $5 = makeTerminalLink(
 const $6 = makeTerminalLink(`${datadogDocsBaseUrl}/synthetics/mobile_app_testing/`)
 
 export class RunTestsCommand extends BaseCommand {
-    console.log('Synthetics CI works Localyy!!!!!!!!!!!!!!!!!!!!')
   public static paths = [
     ['synthetics', 'run-tests'],
     ['synthetics', 'build-and-test'],
@@ -119,6 +118,7 @@ export class RunTestsCommand extends BaseCommand {
   private tearDowns: (() => Promise<void>)[] = []
 
   public async execute() {
+    console.log('Synthetics CI works Localyy!!!!!!!!!!!!!!!!!!!!')
     try {
       await this.setup()
     } catch (error) {
@@ -361,7 +361,7 @@ export class RunTestsCommand extends BaseCommand {
   }
 
   protected getReporters(): Reporter[] {
-    console.log('synthetics CI getReporters!!!!!!!!!!!!!!!!!!!!)
+
     if (this.config.jUnitReport) {
       return [
         new JUnitReporter({
@@ -371,7 +371,7 @@ export class RunTestsCommand extends BaseCommand {
         }),
       ]
     }
-
+console.log('Synthetics CI getReporters!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1')
     return []
   }
 
