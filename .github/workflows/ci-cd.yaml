@@ -19,7 +19,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies for datadog-ci
-        run: npm install
+        run: npm install --legacy-peer-deps
         working-directory: ./datadog-ci
 
       - name: Build local datadog-ci
@@ -31,7 +31,7 @@ jobs:
         working-directory: ./datadog-ci
 
       - name: Install dependencies for custom GitHub Action
-        run: npm install
+        run: npm install --legacy-peer-deps
         working-directory: ./synthetics-ci-github-action
 
       - name: Run Jest Tests
@@ -55,7 +55,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies for datadog-ci
-        run: npm install
+        run: npm install --legacy-peer-deps
         working-directory: ./datadog-ci
 
       - name: Build and link local datadog-ci CLI
@@ -65,7 +65,7 @@ jobs:
         working-directory: ./datadog-ci
 
       - name: Install dependencies for Action
-        run: npm install
+        run: npm install --legacy-peer-deps
         working-directory: ./synthetics-ci-github-action
 
       - name: Run Datadog Synthetic Tests
