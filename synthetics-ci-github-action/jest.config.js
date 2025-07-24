@@ -6,4 +6,7 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest',
   },
   verbose: true,
+  moduleNameMapper: {
+    '^@datadog/datadog-ci$': '<rootDir>/../datadog-ci', // 👈 map alias to relative path
+  },
 }
