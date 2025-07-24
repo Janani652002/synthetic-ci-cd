@@ -114,11 +114,10 @@ const triggerTests = (request: (args: AxiosRequestConfig) => AxiosPromise<any>) 
     {
       data,
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.MY_BACKEND_TOKEN}`, // if needed
+        'Content-Type': 'application/json'
       },
       method: 'POST',
-      url: 'https://your-backend.com/api/synthetics/run', // 🔁 your backend endpoint
+      url: 'http://localhost:8080/accounts/685928becc22fdb3531cd4e5/synthetic/checks/manual-run', // 🔁 your backend endpoint
     },
     request,
     { retryOn429: true }
