@@ -133,6 +133,7 @@ const getTest = (request: (args: AxiosRequestConfig) => AxiosPromise<ServerTest>
   testId: string,
   testType?: string
 ) => {
+    console.log('getTest', testType, testId, request)
   const resp = await retryRequest(
     {
       url: !!testType ? `/synthetics/tests/${testType}/${testId}` : `/synthetics/tests/${testId}`,
@@ -148,6 +149,7 @@ const getLocalTestDefinition = (request: (args: AxiosRequestConfig) => AxiosProm
   testId: string,
   testType?: string
 ) => {
+    console.log('getLocalTestDefinition', testType, testId, request)
   const resp = await retryRequest(
     {
       params: {
@@ -166,6 +168,7 @@ const editTest = (request: (args: AxiosRequestConfig) => AxiosPromise<void>) => 
   testId: string,
   data: ServerTest
 ) => {
+    console.log('editTest', testId, data, request)
   await retryRequest(
     {
       data,
@@ -180,6 +183,7 @@ const editTest = (request: (args: AxiosRequestConfig) => AxiosPromise<void>) => 
 const searchTests = (request: (args: AxiosRequestConfig) => AxiosPromise<TestSearchResult>) => async (
   query: string
 ) => {
+    console.log('searchTests', request)
   const resp = await retryRequest(
     {
       params: {
