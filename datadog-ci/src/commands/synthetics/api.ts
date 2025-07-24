@@ -93,17 +93,38 @@ export const formatBackendErrors = (requestError: AxiosError<BackendError>, scop
   return `could not query ${requestError.config?.baseURL}${requestError.config?.url}\n${requestError.message}`
 }
 
-const triggerTests = (request: (args: AxiosRequestConfig) => AxiosPromise<ServerTrigger>) => async (data: Payload) => {
+// const triggerTests = (request: (args: AxiosRequestConfig) => AxiosPromise<ServerTrigger>) => async (data: Payload) => {
+//   const resp = await retryRequest(
+//     {
+//       data,
+//       headers: {'X-Trigger-App': ciTriggerApp},
+//       method: 'POST',
+//       url: '/synthetics/tests/trigger/ci',
+//     },
+//     request,
+//     {retryOn429: true}
+//   )
+//   console.log('respnse', resp.data)
+
+//   return resp.data
+// }
+
+const triggerTests = (request: (args: AxiosRequestConfig) => AxiosPromise<any>) => async (data: Payload) => {
   const resp = await retryRequest(
     {
       data,
-      headers: {'X-Trigger-App': ciTriggerApp},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.MY_BACKEND_TOKEN}`, // if needed
+      },
       method: 'POST',
-      url: '/synthetics/tests/trigger/ci',
+      url: 'https://your-backend.com/api/synthetics/run', // 🔁 your backend endpoint
     },
     request,
-    {retryOn429: true}
+    { retryOn429: true }
   )
+
+  console.log('Custom backend response:', resp.data)
 
   return resp.data
 }
