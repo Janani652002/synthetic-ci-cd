@@ -230,6 +230,10 @@ const createProxyAgentForUrl = (proxyUrl: string) => {
 }
 
 export const getApiHostForSite = (site: string) => {
+
+  if (site.startsWith('http://') || site.startsWith('https://') || site.includes('localhost')) {
+    return site  // ✅ Use the site directly if it's a full URL or localhost
+  }
   switch (site) {
     case 'datad0g.com':
       return `app.${site}`
