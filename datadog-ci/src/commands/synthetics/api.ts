@@ -133,7 +133,7 @@ const getTest = (request: (args: AxiosRequestConfig) => AxiosPromise<ServerTest>
   testId: string,
   testType?: string
 ) => {
-    console.log('getTest', testType, testId, request)
+    console.log('getTest inside api.ts', testType, testId, request)
   const resp = await retryRequest(
     {
       url: !!testType ? `/synthetics/tests/${testType}/${testId}` : `/synthetics/tests/${testId}`,

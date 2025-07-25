@@ -241,6 +241,7 @@ const getTest = async (
   api: APIHelper,
   triggerConfig: TriggerConfig
 ): Promise<{test: Test} | {errorMessage: string}> => {
+    console.log('getTest inside test.ts', triggerConfig)
   if (isLocalTriggerConfig(triggerConfig)) {
     const test = {
       ...triggerConfig.localTestDefinition,
